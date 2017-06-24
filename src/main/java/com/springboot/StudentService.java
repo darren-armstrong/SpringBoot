@@ -31,5 +31,24 @@ public class StudentService {
 		
 		return student;
 	}
+	
+	@RequestMapping(value="/delete/{id}", method = RequestMethod.DELETE)
+	public Student deleteStudent(@PathVariable long id) throws Exception {
+		Student student;
+		
+		if(Application.hmStudent.containsKey(new Long(id))){
+			student = Application.hmStudent.get(new Long(id));
+			Application.hmStudent.remove(new Long(id));
+		}else{
+			throw new Exception("Student " + id + " does not exist");
+		}
+		
+		return student;
+	}
+	
+	@RequestMapping(value="/{id}", method = RequestMethod.GET)
+	public Student getStudent(@PathVariable long id){
+		return Application.hmStudent.get(new Long(id));
+	}
 
 }

@@ -19,5 +19,17 @@ public class StudentService {
 		Application.hmStudent.put(new Long(student.getId()), student);
 		return student;
 	}
+	
+	@RequestMapping(value="/update", method = RequestMethod.PUT)
+	public Student updateStudent(@RequestBody Student student) throws Exception {
+		
+		if(Application.hmStudent.containsKey(new Long(student.getId()))){
+			Application.hmStudent.put(new Long(student.getId()), student);
+		}else{
+			throw new Exception("Student " + student.getId() + " does not exist");
+		}
+		
+		return student;
+	}
 
 }
